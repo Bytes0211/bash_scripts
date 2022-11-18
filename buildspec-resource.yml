@@ -1,0 +1,143 @@
+version: 0.2
+# the specifies the unix user that is present on the local machine to run the commands
+# grants the specified user read and run permissions
+# run as here makes it the run as command global 
+# you can specify run as in each phase of the build spec and that user will only be avail
+# to that phase
+run-as: Linux-user-name
+
+# env is optional. Specifies the support shell for Linux oro Windows
+env:
+  shell: shell-tag
+  # required if env is specified. 
+  # define custom env vars here in key/value scalars
+  # example - DB_HOST: "localhost"
+  # ITS STRONGLY RECOMMENDED TO NOT STORE SENSITIVE , SECURITY VALUES HERE 
+  # If a key/value is repeated the value is determined as follows
+  #   if the value is in the build phase it takes highest precedent 
+  #   the value in the build project definition takes next precedent 
+  variables:
+    key1: "value"
+    key2: "value"
+  # param store required if env is included
+  # use if you want to retrieve custom environment variables stored in Amazon EC2 
+  # Systems Manager Parameter Store
+  # You must add the ssm:GetParameters action to your CodeBuild service rile
+  parameter-store:
+    key1: "value"
+    key2: "value"
+  # exported-variables is optional
+  # used to list environment variables you want to export 
+  # The exported value you want to export must be available in your container 
+  # USE CASE - you can use exported-variables to exported values from the build stage
+  # to subsequent stages in the pipeline. 
+  # The value of the variables are available with the install phase, It can be updated 
+  # between install and post-build phases
+  exported-variables:
+    - variable
+    - variable
+  # required if you retrieve custom env vars stored in AWS Secrets Manager 
+  secrets-manager:
+    key: secret-id:json-key:version-stage:version-id
+  git-credential-helper: no | yes
+
+# proxy is optional. Used to represent settings if you run your build in an explicit proxy server
+proxy:
+  upload-artifacts: no | yes
+  logs: no | yes
+
+batch:
+  fast-fail: false | true
+  # build-list:
+  # build-matrix:
+  # build-graph:
+
+# REQUIRED. Represents the commands CodeBuild runs during each phase of the build 
+# its best to use buildspec version 0.2 if you want to have multiple commands working
+# together (for ex passing variables, or depended on the prev command completing successfuly)    
+phases:
+  # optional
+  # commands, if any, that CodeBuild should run during installation 
+  # recommended to use for only installing packages 
+  install:
+    # optional 
+    # specify the linux user to execute build phase commands 
+    run-as: Linux-user-name
+    # optional
+    # action to take if failure occurs ABORT or CONTINUE 
+    on-failure: ABORT | CONTINUE
+    runtime-versions:
+      runtime1: version
+      runtime2: version
+    commands:
+      - command
+      - command
+    finally:
+      - command
+      - command
+  # pre_build is optional
+  # runs before the build 
+  # a good use case in to sign in to amazon resource , or install package dependencies 
+  pre_build:
+    run-as: Linux-user-name
+    on-failure: ABORT | CONTINUE
+    commands:
+      - command
+      - command
+    finally:
+      - command
+      - command
+  build:
+    run-as: Linux-user-name
+    on-failure: ABORT | CONTINUE
+    commands:
+      - command
+      - command
+    finally:
+      - command
+      - command
+  post_build:
+    run-as: Linux-user-name
+    on-failure: ABORT | CONTINUE
+    commands:
+      - command
+      - command
+    finally:
+      - command
+      - command
+reports:
+  report-group-name-or-arn:
+    files:
+      - location
+      - location
+    base-directory: location
+    discard-paths: no | yes
+    file-format: report-format
+artifacts:
+  files:
+    - location
+    - location
+  name: artifact-name
+  discard-paths: no | yes
+  base-directory: location
+  exclude-paths: excluded paths
+  enable-symlinks: no | yes
+  s3-prefix: prefix
+  secondary-artifacts:
+    artifactIdentifier1:
+      files:
+        - location
+        - location
+      name: secondary-artifact-name
+      discard-paths: no | yes
+      base-directory: location
+    artifactIdentifier2:
+      files:
+        - location
+        - location
+      discard-paths: no | yes
+      base-directory: location
+cache:
+  paths:
+    - path
+    - path
