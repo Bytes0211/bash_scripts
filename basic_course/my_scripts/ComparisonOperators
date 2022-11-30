@@ -1,0 +1,25 @@
+Equality Operators
+* Equal To
+  * -eq
+    * if [ "$a" -eq "$b" ]
+* Not Equal To
+  * -ne
+    * if [ "$a" -ne "$b" ]
+* Greater Than
+  * gt
+  * if [ "$a" -gt "$b" ]
+* Greater Than or Equal To
+  * ge
+  * if [ "$a" -ge "$b" ]
+* Less Than
+  * lt
+  * if [ "$a" -elt "$b" ]
+* Less Than or Equal To
+  * le
+  * if [ "$a" -le "$b" ]
+* Is Less Than
+  * <
+  * if [ "$a" < "$b" ]
+* Is Less Than or Equal To
+  * <
+  * if [ "$a" <=> "$b" ]

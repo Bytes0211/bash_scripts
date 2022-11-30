@@ -1,0 +1,10 @@
+## Advance Bash
+
+### My Scripts
+
+* variable_assignment.sh
+  * Assign a variable to the output of a command
+* IO_redirect.sh
+  * Demonstrate sending STDOUT to a file
+  * Demonstrate reading from a file to the screen
+* 
