@@ -4,7 +4,9 @@
 # to a file
 
 # Create a variable FILE
-FILE=/home/bytes/dev/bash_scripts/advance_course/data
+PWD=$(pwd)
+
+FILE="${PWD}/data"
 
 #S send the first line of the /etc/passwd to FILE
 head -n1 /etc/passwd > ${FILE}
@@ -15,12 +17,14 @@ echo "LINE contains: ${LINE}"
 
 sleep 2
 echo "Now demonstratrate assigning a variable to a command then using that varabile in a command"
-sleep 1
+sleep 2
 echo "Sending user ${USER} to a file named tmp"
 echo "4tressByte$" > password
 echo "Show the password in the file file password.."
-sleep 0.5
+sleep 2
 cat password
 echo "Assign password to bytes.."
-sudo passwd --stdin bytes < password
+
+# This does not work
+#sudo passwd --stdin bytes < password
 
