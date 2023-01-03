@@ -9,10 +9,11 @@ file = input("Enter file name to be decrypted: ")
 # create file path and validate the file exist
 path = os.getcwd()
 file_path = path + "/" + file
+key_path = path + "/filekey.key"
 if os.path.isfile(file_path): 
     try: 
         # get key
-        with open('filekey.key', 'rb') as filekey:
+        with open(key_path, 'rb') as filekey:
             key = filekey.read()
             print(key)
         
@@ -30,7 +31,7 @@ if os.path.isfile(file_path):
         
         # decrypt
         decrypt = fernet.decrypt(encrypted)
-        print(f'THIS IS DECRYPT: {decrypt}')
+        print(f'Decrypted file:\n{decrypt}')
         
         # write decrypted data to file
         with open(file_path, 'wb') as dec_file:
