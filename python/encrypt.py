@@ -9,10 +9,11 @@ file = input("Enter file name to encrypt: ")
 # create file path and validate the file exist
 path = os.getcwd()
 file_path = path + "/" + file
+key_path = path + "/filekey.key"
 if os.path.isfile(file_path): 
     try: 
         # encrypt file
-        with open('/home/ubuntu/dev/lib/filekey.key', 'rb') as filekey:
+        with open(key_path, 'rb') as filekey:
             key = filekey.read()
         
         # use the generated key
