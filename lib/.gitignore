@@ -1,0 +1,12 @@
+/fastapi_basics/__pycache__
+/fastapi_basics/fbvenv
+/fastapi_prereqs/__pycache__
+/fastapi_prereqs/blogvenv
+/fastapi_hello/__pycache__
+/fastapi_hello/hellovenv
+/fastapi_hello/core/__pycache__
+/fastapi_hello/apis/general_pages/__pycache__
+/fastapi_hello/db/__pycache__
+/fastapi_hello/db/models/__pycache__
+
+
